@@ -1,0 +1,16 @@
+Routes:
+--------------------------------
+Before Auth
+/ -> Home Page
+/Register -> Register page 
+/login -> Login page
+---------------------------------
+After Auth:
+/Dashboard -> Dashboard page,
+/Baskets -> Baskets page
+/Basket/Todos -> Todos page,
+/Basket/Habits -> Habits page,
+/Basket/Notes -> Notes page,
+
+----------------------------------
+/layout -> if (AuthUser) ? <Dashboard/> : <Home/>
