@@ -8,8 +8,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-  let localData = JSON.parse(localStorage.getItem("credentials"));
 
+  let localData = JSON.parse(localStorage.getItem('Registered_email'));
   const Navigate = useNavigate();
 
   const InitialValues = {
@@ -30,9 +30,9 @@ export default function LoginForm() {
     try {
       return await signInWithEmailAndPassword(auth,values.Email, values.Password)
       .then((res) => {
-        const loginCredentials = res.user;
-        validateLogin(loginCredentials.email);
-        Navigate("/")
+        const loginEmail = res.user.email;
+        validateLogin(loginEmail);
+        Navigate('/')
       });
     }
     catch(err) {
@@ -40,8 +40,9 @@ export default function LoginForm() {
     }
   }
 
+
   const validateLogin = (email) =>  {
-    if(email === localData.email){
+    if(email === localData) {
       alert("successfully logged in");
     }
     else {

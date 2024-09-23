@@ -27,6 +27,7 @@ export default function RegisterForm() {
       .min(8, "password must be 8 characters long"),
   });
 
+
   // register user data //
   const OnSubmitForm = async (values) => {
     try {
@@ -35,9 +36,7 @@ export default function RegisterForm() {
         values.Email,
         values.Password
       ).then((response) => {
-        localStorage.setItem("DoerName", JSON.stringify(values.Name));
-        localStorage.setItem("credentials", JSON.stringify(response.user));
-        alert("Registration successful. login to continue");
+        localStorage.setItem( 'Registered_email', JSON.stringify(response.user.email));
         navigate('/login');
       });
     } catch (err) {

@@ -1,10 +1,11 @@
-
 import Home from "../views/Home";
 import Dashboard from "../views/Dashboard";
 
 export default function HomeLayout() {
 
-  let AuthUser = JSON.parse(localStorage.getItem("DoerName"));
+  let IsAuth = JSON.parse(localStorage.getItem('Registered_email'));
 
-  return AuthUser ? <Dashboard/> : <Home/>
+  return (
+    IsAuth ? <Dashboard/> : <Home/>
+  )
 }
