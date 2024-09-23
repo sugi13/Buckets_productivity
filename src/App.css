@@ -44,7 +44,7 @@
   align-items: center;
   gap:20px;
 }
-.inputs input{
+.inputs .input{
   border: .5px solid #e6e6e6;
   width: 340px;
   padding: 9px;
@@ -58,7 +58,16 @@
 }
 .btn button{
   background-color: #FF7744;
-  width: 70%;
+  width: 350px;
   border-radius: 5px;
   padding: 8px;
+}
+#google{
+  border: .5px solid #e6e6e6;
+  background: none;
+}
+.inputs span{
+  font-size: .7rem;
+  font-weight: normal;
+  color: #F8AB0C;
 }

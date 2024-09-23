@@ -14,3 +14,74 @@ After Auth:
 
 ----------------------------------
 /layout -> if (AuthUser) ? <Dashboard/> : <Home/>
+
+// password less auth //
+
+Login page -> confirm page -> Dashboard 
+
+In login page:
+
+import { auth } from "../../firebase/firebase.config";
+import {sendSignInLinkToEmail} from "firebase/auth";
+
+const actionCodeSettings = {
+    url: "http://localhost:5173/Confirm",
+    handleCodeInApp: true,
+  }
+
+  const HandleSignInEmail = (e) => {
+    e.preventDefault();
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    .then(() => {
+      setNotice("An email was sent to your corresponding email address. Click the link to login")
+    })
+    .catch(() => {
+      setNotice("An error occurred while sending an email link.")
+    })
+  }
+
+  update the function to the login button.
+
+In confirmation page:
+
+import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
+
+const [Email, setEmail] = useState("");
+const [Notice, setNotice] = useState("");
+
+
+  const HandleSignIn = (e) => {
+    e.preventDefault();
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      signInWithEmailLink(auth, Email, window.location.href)
+        .then(() => {
+          navigate("/Dashboard");
+        })
+        .catch((error) => {
+          setNotice("An occurred during sign in: ", error.name);
+        });
+    }
+  };
+
+// with email and password //
+
+ const onFormSubmit = async(values) => {
+    try{
+      return await createUserWithEmailAndPassword(UserAuth, values.Email, values.Password)
+      .then((credentials) => {
+        localStorage.setItem('user_name', JSON.stringify(values.Name));
+        localStorage.setItem('user_credentials', JSON.stringify(credentials.user));
+        alert("Let's productive");
+        navigate('/');
+      })
+    }
+    catch(err){
+      console.log(err.message);
+    }
+
+Todo's in form 
+
+1. Add error elements. ✅
+2. Error state update.
+3. Authentication

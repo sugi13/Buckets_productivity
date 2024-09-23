@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeLayout from "../layout/HomeLayout";
 import Register from "../views/Register";
-import Login from "../views/Login"
+import Login from "../views/Login";
+
 
 export default function Router() {
     return (
