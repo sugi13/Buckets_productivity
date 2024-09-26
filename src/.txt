@@ -80,8 +80,11 @@ const [Notice, setNotice] = useState("");
       console.log(err.message);
     }
 
-Todo's in form 
-
-1. Add error elements. ✅
-2. Error state update.
-3. Authentication
+      <div className="Dash_routes flex flex-col gap-11">
+        <p className="flex items-center gap-2"><Dashboard size={14}/>Dashboard</p>
+        <p className="flex items-center gap-2"><Person size={14}/>Your Baskets</p>
+        <p className="flex items-center gap-2"><PersonAdd size={14}/>New Basket</p>
+        <p className="flex items-center gap-2"><Home size={14}/>Your Profile</p>
+        <p className="flex items-center gap-2"><SettingsHorizontal size={14}/>Settings</p>
+        <p className="flex items-center gap-2 text-blue-500"><SignOut size={14}/>Sign out</p>
+      </div>

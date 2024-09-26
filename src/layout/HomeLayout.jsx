@@ -4,8 +4,9 @@ import Dashboard from "../views/Dashboard";
 export default function HomeLayout() {
 
   let IsAuth = JSON.parse(localStorage.getItem('Registered_email'));
+  let IsToken = JSON.parse(localStorage.getItem('access_token'));
 
   return (
-    IsAuth ? <Dashboard/> : <Home/>
+    IsAuth || IsToken ? <Dashboard/> : <Home/>
   )
-}
+} 

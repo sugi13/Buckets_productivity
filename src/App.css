@@ -100,3 +100,33 @@
   justify-content: center;
   z-index: 1;
 }
+
+/* dashboard */
+
+.Dash-nav{
+  border-bottom: .01rem solid #e6e6e6;
+}
+
+.user-profile{
+  font-size: .8rem;
+  font-weight: normal;
+  background: #e6e6e6;
+  padding: 7px 12px;
+  border-radius: 5px;
+}
+
+.Dash_components{
+  width: 100%;
+  height: 90vh;
+  display: flex;
+}
+
+.Side_bar{
+  width: 20%;
+  border-right: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}

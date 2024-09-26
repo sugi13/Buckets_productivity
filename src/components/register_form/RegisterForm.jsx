@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { auth } from "../../firebase/firebase.config";
+import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { GoogleFill } from "akar-icons";
+import { GithubFill} from "akar-icons";
+
+
 
 export default function RegisterForm() {
   const initialValues = {
@@ -14,6 +17,9 @@ export default function RegisterForm() {
     Email: "",
     Password: "",
   };
+
+  // initialize provider //
+  const GitProvider = new GithubAuthProvider();
 
   const navigate = useNavigate();
 
@@ -36,13 +42,27 @@ export default function RegisterForm() {
         values.Email,
         values.Password
       ).then((response) => {
-        localStorage.setItem( 'Registered_email', JSON.stringify(response.user.email));
+        localStorage.setItem('Registered_email', JSON.stringify(response.user.email));
         navigate('/login');
       });
     } catch (err) {
       console.log(err.message);
     }
   };
+
+  // sign in using git //
+  const GitLogin = async () => {
+    try {
+      const SuccessResult = await signInWithPopup(auth, GitProvider);
+      localStorage.setItem("access_token", JSON.stringify(SuccessResult.user.accessToken));
+      localStorage.setItem('git_user_credentials', JSON.stringify(SuccessResult.user));
+      alert("Authentication successful 🙌");
+      navigate("/");
+    }
+    catch (err) {
+      console.log(err.message); 
+    }
+  }
 
   return (
     <div className="Register flex justify-around items-center font-Inter">
@@ -119,7 +139,7 @@ export default function RegisterForm() {
                   <div className="btn flex items-center gap-1 flex-col justify-center font-Inter font-normal text-xs">
                     <button id="submit" type="submit" className="text-white">Register</button>
                     <p>or</p>
-                    <button id='google' className="flex items-center justify-center gap-2"><GoogleFill size={16} />Sign in with google</button>
+                    <button id='google' type="button" className="flex items-center justify-center gap-2" onClick={GitLogin}><GithubFill size={16} />Sign in with GitHub</button>
                     <p className="text-black mt-5 ">
                       Already a user?{" "}
                       <Link to="/login" className="text-blue-500">
